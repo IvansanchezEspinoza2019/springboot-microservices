@@ -38,7 +38,7 @@ const App: React.FC = () => {
               <Redirect to="/page/Inbox" />
             </Route>
             <Route path="/page/customers" exact={true}>
-                <Customer></Customer>
+                <Customer />
             </Route>
            
           </IonRouterOutlet>
