@@ -11,8 +11,9 @@ import {
 } from '@ionic/react';
 
 import { useLocation } from 'react-router-dom';
-import { archiveOutline, archiveSharp, bookmarkOutline, heartOutline, heartSharp, mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, people, peopleCircle, peopleCircleSharp, trashOutline, trashSharp, warningOutline, warningSharp } from 'ionicons/icons';
+import { archiveOutline, archiveSharp, bookmarkOutline, hammer, hammerSharp, heartOutline, heartSharp, mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, people, peopleCircle, peopleCircleSharp, peopleSharp, trashOutline, trashSharp, warningOutline, warningSharp } from 'ionicons/icons';
 import './Menu.css';
+
 
 interface AppPage {
   url: string;
@@ -23,40 +24,16 @@ interface AppPage {
 
 const appPages: AppPage[] = [
   {
-    title: 'Clientes',
+    title: 'Customers',
     url: '/page/customers',
     iosIcon: peopleCircle,
     mdIcon: people
   },
   {
-    title: 'Outbox',
-    url: '/page/Outbox',
-    iosIcon: peopleCircleSharp,
-    mdIcon: paperPlaneSharp
-  },
-  {
-    title: 'Favorites',
-    url: '/page/Favorites',
-    iosIcon: heartOutline,
-    mdIcon: heartSharp
-  },
-  {
-    title: 'Archived',
-    url: '/page/Archived',
-    iosIcon: archiveOutline,
-    mdIcon: archiveSharp
-  },
-  {
-    title: 'Trash',
-    url: '/page/Trash',
-    iosIcon: trashOutline,
-    mdIcon: trashSharp
-  },
-  {
-    title: 'Spam',
-    url: '/page/Spam',
-    iosIcon: warningOutline,
-    mdIcon: warningSharp
+    title: 'Employees',
+    url: '/page/employees',
+    iosIcon: hammerSharp,
+    mdIcon: hammer
   }
 ];
 
