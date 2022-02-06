@@ -27,6 +27,8 @@ import Customer from './pages/Customer/Customer';
 import CustomerEdit from './pages/Customer/CustomerEdit';
 import Employee from './pages/Employee/Employee';
 import EmployeeEdit from './pages/Employee/EmployeeEdit';
+import Vendor from './pages/Vendor/Vendor';
+import VendorEdit from './pages/Vendor/VendorEdit';
 
 
 setupIonicReact();
@@ -53,6 +55,13 @@ const App: React.FC = () => {
             </Route>
             <Route path="/page/employees/:id" exact={true}>
                 <EmployeeEdit />
+            </Route>
+
+            <Route path="/page/vendors" exact={true}>
+                <Vendor />
+            </Route>
+            <Route path="/page/vendors/:id" exact={true}>
+                <VendorEdit />
             </Route>
            
           </IonRouterOutlet>
