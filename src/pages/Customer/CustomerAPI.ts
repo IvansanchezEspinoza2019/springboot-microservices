@@ -1,3 +1,5 @@
+import CustomerInterface from "./CustomerInterface";
+
 export function searchCustomers(){
     if(!localStorage['customers']){
         localStorage['customers'] = '[]';
@@ -15,9 +17,23 @@ export function removeCustomer(id: string){
     localStorage['customers']=JSON.stringify(customers);
 }
 
-export function saveCustomer(customer: any){
+export function saveCustomer(customer: CustomerInterface){
     let customers = searchCustomers();
-    customers.push(customer);
+    if(customer.id){
+        // edit existing customer
+        const index = customers.findIndex((c: any) => c.id==customer.id);
+        customers[index] = customer;
+    }else{
+        // new customer
+        customer.id = String(Math.round(Math.random() * 100000))
+        customers.push(customer);
+    }
     localStorage['customers']=JSON.stringify(customers);
 }
+
+export function findCustomerById(id: string){
+    let customers = searchCustomers();
+    return customers.find( (c: any) => c.id==id)
+}
+
 

@@ -5,17 +5,22 @@ from '@ionic/react';
 import { add, close, pencil } from 'ionicons/icons';
 import { useEffect, useState } from 'react';
 
-import { useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import ExploreContainer from '../../components/ExploreContainer';
 import { removeCustomer, searchCustomers } from './CustomerAPI';
+import CustomerInterface from './CustomerInterface';
 
 
 const Customer: React.FC = () => {
-  const [clientes, setClientes] = useState<any>([]);
+  const [clientes, setClientes] = useState<CustomerInterface[]>([]);
   const { name } = useParams<{ name: string; }>();
+  const history = useHistory();
+
+
+
   useEffect(()=>{
     search();
-  }, []);
+  }, [history.location.pathname]);
 
   const search =() =>{
     const customers = searchCustomers();
@@ -25,6 +30,14 @@ const Customer: React.FC = () => {
   const remove  = (id: string)=>{
     removeCustomer(id);
     search();
+  }
+
+  const addCustomer = ()=>{
+    history.push('/page/customers/new')
+  }
+
+  const editCustomer = (id: string)=>{
+    history.push('/page/customers/'+id)
   }
   
 
@@ -51,7 +64,7 @@ const Customer: React.FC = () => {
         
       
           <IonItem>
-            <IonButton color="primary" fill="outline" slot="end" size="default">
+            <IonButton onClick={()=> addCustomer()} color="primary" fill="outline" slot="end" size="default">
               <IonIcon icon={add}></IonIcon>
               Add
             </IonButton>
@@ -65,19 +78,21 @@ const Customer: React.FC = () => {
         <IonCol>Actions</IonCol>
       </IonRow>
 
-        {clientes.map((client: any)=>
+        {clientes.map((client: CustomerInterface)=>
           <IonRow>
             <IonCol>{client.firstName} {client.lastName}</IonCol>
             <IonCol>{client.email}</IonCol>
             <IonCol>{client.phone}</IonCol>
-            <IonCol>{client.add}</IonCol>
+            <IonCol>{client.address}</IonCol>
             <IonCol>
-              <IonButton color="primary" fill='clear'>
+              <IonButton color="primary" fill='clear'
+                onClick={()=>editCustomer(String(client.id))}
+              >
                   <IonIcon icon={pencil} slot='icon-only'></IonIcon>
               </IonButton>
 
               <IonButton color="danger" fill='clear'
-                onClick={() => remove(client.id)}
+                onClick={() => remove(String(client.id))}
               >
                   <IonIcon icon={close} slot='icon-only'></IonIcon>
               </IonButton>
