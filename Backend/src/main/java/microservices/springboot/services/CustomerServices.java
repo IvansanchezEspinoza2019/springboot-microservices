@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerServices implements ICustomerService{
@@ -14,13 +15,13 @@ public class CustomerServices implements ICustomerService{
     private CustomerRepository repository;
 
     @Override
-    public List<Customer> getAll() {
-        return (List<Customer>) repository.findAll();
+    public Iterable<Customer> getAll() {
+        return repository.findAll();
     }
 
     @Override
-    public Customer getByID(Long id) {
-        return (Customer) repository.findById(id).get();
+    public Optional<Customer> getByID(Long id) {
+        return repository.findById(id);
     }
     @Override
     public void remove(Long id){

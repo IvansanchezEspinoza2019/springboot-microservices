@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class CustomerController {
@@ -13,12 +14,12 @@ public class CustomerController {
     private ICustomerService service;
 
     @GetMapping("/api/customers")  //  entry point for customer list
-    public List<Customer> getAll() {
+    public Iterable<Customer> getAll() {
         return service.getAll();
     }
 
     @GetMapping("/api/customers/{id}")  //  entry point for customer list
-    public Customer getByID(@PathVariable String id) {
+    public Optional<Customer> getByID(@PathVariable String id) {
         return service.getByID(Long.parseLong(id));
     }
 
