@@ -54,17 +54,17 @@ import VendorInterface from './VendorInterface';
          <IonRow>
              <IonCol>
                 <IonItem>
-                    <IonLabel position="stacked">First Name</IonLabel>
-                    <IonInput onIonChange={ e => Vendor.firstName = String(e.detail.value)} 
-                    value={Vendor.firstName}> </IonInput>
+                    <IonLabel position="stacked">Name</IonLabel>
+                    <IonInput onIonChange={ e => Vendor.name = String(e.detail.value)} 
+                    value={Vendor.name}> </IonInput>
                 </IonItem>
              </IonCol>
 
              <IonCol>
                 <IonItem>
-                    <IonLabel position="stacked">Last Name</IonLabel>
-                    <IonInput onIonChange={ e => Vendor.lastName= String(e.detail.value)}
-                    value={Vendor.lastName}> </IonInput>
+                    <IonLabel position="stacked">Contaco</IonLabel>
+                    <IonInput onIonChange={ e => Vendor.contact= String(e.detail.value)}
+                    value={Vendor.contact}> </IonInput>
                 </IonItem>
              </IonCol>
         </IonRow>
@@ -93,7 +93,13 @@ import VendorInterface from './VendorInterface';
                     <IonLabel position="stacked">Phone Number</IonLabel>
                     <IonInput onIonChange={ e=> Vendor.phone = String(e.detail.value)}
                     value={Vendor.phone}> </IonInput>
-                    </IonItem>
+                </IonItem>
+
+                <IonItem>
+                    <IonLabel position="stacked">Web</IonLabel>
+                    <IonInput onIonChange={ e=> Vendor.web = String(e.detail.value)}
+                    value={Vendor.web}> </IonInput>
+                </IonItem>
              </IonCol>
          </IonRow>
 

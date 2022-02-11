@@ -95,6 +95,12 @@ import EmployeeInterface from './EmployeeInterface';
                     <IonInput onIonChange={ e=> employee.phone = String(e.detail.value)}
                     value={employee.phone}> </IonInput>
                     </IonItem>
+
+                    <IonItem>
+                    <IonLabel position="stacked">Salary</IonLabel>
+                    <IonInput onIonChange={ e=> employee.salary = Number(e.detail.value)}
+                    value={employee.salary}> </IonInput>
+                    </IonItem>
              </IonCol>
          </IonRow>
 

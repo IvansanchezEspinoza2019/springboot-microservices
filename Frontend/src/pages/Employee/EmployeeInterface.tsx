@@ -4,5 +4,6 @@ export default interface EmployeeInterface {
     lastName?: string,
     email?: string,
     phone?: string,
-    address?: string
+    address?: string,
+    salary?: number
 }
