@@ -9,25 +9,23 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "vendors")
+@Getter @Setter
 @ToString
 @EqualsAndHashCode
 public class Vendor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Getter @Setter
+    @Column(name = "name")
     private String name;
-    @Getter @Setter
+    @Column(name = "email")
     private String email;
-    @Getter @Setter
+    @Column(name = "phone")
     private String phone;
-    @Getter @Setter
+    @Column(name = "address")
     private String address;
-    @Getter @Setter
+    @Column(name = "contact")
     private String contact;
-    @Getter @Setter
+    @Column(name = "web")
     private String web;
-
-
-
 }

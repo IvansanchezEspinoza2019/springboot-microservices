@@ -21,7 +21,7 @@ public class CustomerServices implements ICustomerService{
 
     @Override
     public Optional<Customer> getByID(Long id) {
-        return repository.findById(id);
+        return repository.findById(id).isPresent()? repository.findById(id):null;
     }
     @Override
     public void remove(Long id){

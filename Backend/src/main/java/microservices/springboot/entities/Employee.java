@@ -9,22 +9,24 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "employees")
+@Getter @Setter
 @ToString
 @EqualsAndHashCode
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Getter @Setter
+
+    @Column(name = "first_name")
     private String firstName;
-    @Getter @Setter
+    @Column(name = "last_name")
     private String lastName;
-    @Getter @Setter
+    @Column(name = "email")
     private String email;
-    @Getter @Setter
+    @Column(name = "phone")
     private String phone;
-    @Getter @Setter
+    @Column(name = "address")
     private String address;
-    @Getter @Setter
+    @Column(name = "salary")
     private Double salary;
 }
