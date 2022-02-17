@@ -4,29 +4,33 @@ import { IonButtons, IonButton, IonCard, IonCol,
  from '@ionic/react';
  import { add, checkmark, close, pencil } from 'ionicons/icons';
  import { useEffect, useState } from 'react'; 
- import { useHistory, useParams } from 'react-router';
+ import { useHistory, useParams, useRouteMatch } from 'react-router';
  import { removeVendor, saveVendor, searchVendors } from './VendorAPI';
  import { findVendorById } from './VendorAPI';
 import VendorInterface from './VendorInterface';
  
  const VendorEdit: React.FC = () => {
-    const { name, id } = useParams<{ name: string; id: string}>();
+    const { name} = useParams<{ name: string}>();
     const [Vendor, setVendor] = useState<VendorInterface>({});
     const history = useHistory()
+    const routeMatch: any = useRouteMatch("/page/vendors/:id");
+    let id = routeMatch?.params?.id;
  
    useEffect(()=>{
      search();
-   }, []);
+   }, [history.location.pathname]);
  
-   const search =() =>{
-      if (id !== 'new'){
-        let  Vendor = findVendorById(id);
-        setVendor(Vendor)
+   const search = async() =>{
+      if (id === 'new'){
+        setVendor({});
+      } else {
+         let  Vendor = await findVendorById(id);
+         setVendor(Vendor)
       }
    }
 
-   const save = ()=>{
-     saveVendor(Vendor)
+   const save = async ()=>{
+     await  saveVendor(Vendor)
      history.push("/page/vendors")
    }
  
@@ -94,7 +98,8 @@ import VendorInterface from './VendorInterface';
                     <IonInput onIonChange={ e=> Vendor.phone = String(e.detail.value)}
                     value={Vendor.phone}> </IonInput>
                 </IonItem>
-
+                </IonCol>
+                <IonCol>
                 <IonItem>
                     <IonLabel position="stacked">Web</IonLabel>
                     <IonInput onIonChange={ e=> Vendor.web = String(e.detail.value)}
@@ -102,6 +107,8 @@ import VendorInterface from './VendorInterface';
                 </IonItem>
              </IonCol>
          </IonRow>
+
+
 
     <IonItem>
         <IonButton onClick={()=>save()} color="success" fill="outline" slot="end" size="default">

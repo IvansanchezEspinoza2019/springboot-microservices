@@ -1,39 +1,76 @@
 import EmployeeInterface from "./EmployeeInterface";
 
-export function searchEmployees(){
-    if(!localStorage['Employees']){
-        localStorage['Employees'] = '[]';
+export async function searchEmployees(){
+    let response = await fetch("/api/employees", {
+        "method": "GET",
+        "headers": {
+            "content-type": "application/json"
+        }
+    });
+
+/*
+
+    if(!localStorage['employees']){
+        localStorage['employees'] = '[]';
         return [];
     }
-    let EmployeesJsonStr= localStorage['Employees'];
-    let Employees = JSON.parse(EmployeesJsonStr);
-    return Employees;
+    let employeesJsonStr= localStorage['employees'];
+    let employees = JSON.parse(employeesJsonStr);*/
+    return await response.json();
 }
 
-export function removeEmployee(id: string){
-    let Employees = searchEmployees();
-    const index = Employees.findIndex((c: any) => c.id==id);
-    Employees.splice(index, 1)
-    localStorage['Employees']=JSON.stringify(Employees);
+export async function removeEmployee(id: string){
+    console.log(id)
+    await fetch("/api/employees/"+id, {
+        "method": "DELETE",
+        "headers": {
+            "content-type": "application/json"
+        }
+    });
+
+    /*
+    let employees = await searchEmployees();
+    const index = employees.findIndex((c: any) => c.id==id);
+    employees.splice(index, 1)
+    localStorage['employees']=JSON.stringify(employees);*/
 }
 
-export function saveEmployee(Employee: EmployeeInterface){
-    let Employees = searchEmployees();
-    if(Employee.id){
-        // edit existing Employee
-        const index = Employees.findIndex((c: any) => c.id==Employee.id);
-        Employees[index] = Employee;
+export async function saveEmployee(employee: EmployeeInterface){
+    await fetch("/api/employees", {
+        "method": "POST",
+        "body": JSON.stringify(employee),
+        "headers": {
+            "content-type": "application/json"
+        }
+    });
+
+    /*
+    let employees = await searchEmployees();
+    if(employee.id){
+        // edit existing employee
+        const index = employees.findIndex((c: any) => c.id==employee.id);
+        employees[index] = employee;
     }else{
-        // new Employee
-        Employee.id = String(Math.round(Math.random() * 100000))
-        Employees.push(Employee);
+        // new employee
+        employee.id = String(Math.round(Math.random() * 100000))
+        employees.push(employee);
     }
-    localStorage['Employees']=JSON.stringify(Employees);
+    localStorage['employees']=JSON.stringify(employees); */
 }
 
-export function findEmployeeById(id: string){
-    let Employees = searchEmployees();
-    return Employees.find( (c: any) => c.id==id)
+export async function findEmployeeById(id: string){
+    let response = await fetch("/api/employees/"+id, {
+        "method": "GET",
+        "headers": {
+            "content-type": "application/json"
+        }
+    });
+
+    /*
+    let employees = await searchEmployees();
+    return employees.find( (c: any) => c.id==id) */
+
+    return await response.json()
 }
 
 

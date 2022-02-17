@@ -1,39 +1,76 @@
 import VendorInterface from "./VendorInterface";
 
-export function searchVendors(){
-    if(!localStorage['Vendors']){
-        localStorage['Vendors'] = '[]';
+export async function searchVendors(){
+    let response = await fetch("/api/vendors", {
+        "method": "GET",
+        "headers": {
+            "content-type": "application/json"
+        }
+    });
+
+/*
+
+    if(!localStorage['vendors']){
+        localStorage['vendors'] = '[]';
         return [];
     }
-    let VendorsJsonStr= localStorage['Vendors'];
-    let Vendors = JSON.parse(VendorsJsonStr);
-    return Vendors;
+    let vendorsJsonStr= localStorage['vendors'];
+    let vendors = JSON.parse(vendorsJsonStr);*/
+    return await response.json();
 }
 
-export function removeVendor(id: string){
-    let Vendors = searchVendors();
-    const index = Vendors.findIndex((c: any) => c.id==id);
-    Vendors.splice(index, 1)
-    localStorage['Vendors']=JSON.stringify(Vendors);
+export async function removeVendor(id: string){
+    console.log(id)
+    await fetch("/api/vendors/"+id, {
+        "method": "DELETE",
+        "headers": {
+            "content-type": "application/json"
+        }
+    });
+
+    /*
+    let vendors = await searchVendors();
+    const index = vendors.findIndex((c: any) => c.id==id);
+    vendors.splice(index, 1)
+    localStorage['vendors']=JSON.stringify(vendors);*/
 }
 
-export function saveVendor(Vendor: VendorInterface){
-    let Vendors = searchVendors();
-    if(Vendor.id){
-        // edit existing Vendor
-        const index = Vendors.findIndex((c: any) => c.id==Vendor.id);
-        Vendors[index] = Vendor;
+export async function saveVendor(vendor: VendorInterface){
+    await fetch("/api/vendors", {
+        "method": "POST",
+        "body": JSON.stringify(vendor),
+        "headers": {
+            "content-type": "application/json"
+        }
+    });
+
+    /*
+    let vendors = await searchVendors();
+    if(vendor.id){
+        // edit existing vendor
+        const index = vendors.findIndex((c: any) => c.id==vendor.id);
+        vendors[index] = vendor;
     }else{
-        // new Vendor
-        Vendor.id = String(Math.round(Math.random() * 100000))
-        Vendors.push(Vendor);
+        // new vendor
+        vendor.id = String(Math.round(Math.random() * 100000))
+        vendors.push(vendor);
     }
-    localStorage['Vendors']=JSON.stringify(Vendors);
+    localStorage['vendors']=JSON.stringify(vendors); */
 }
 
-export function findVendorById(id: string){
-    let Vendors = searchVendors();
-    return Vendors.find( (c: any) => c.id==id)
+export async function findVendorById(id: string){
+    let response = await fetch("/api/vendors/"+id, {
+        "method": "GET",
+        "headers": {
+            "content-type": "application/json"
+        }
+    });
+
+    /*
+    let vendors = await searchVendors();
+    return vendors.find( (c: any) => c.id==id) */
+
+    return await response.json()
 }
 
 

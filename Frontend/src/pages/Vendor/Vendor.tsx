@@ -17,18 +17,17 @@ const Vendor: React.FC = () => {
   const history = useHistory();
 
 
-
   useEffect(()=>{
     search();
   }, [history.location.pathname]);
 
-  const search =() =>{
-    const Vendors = searchVendors();
+  const search = async () =>{
+    const Vendors = await searchVendors();
     setVendors(Vendors);
   }
 
-  const remove  = (id: string)=>{
-    removeVendor(id);
+  const remove  = async (id: string)=>{
+    await removeVendor(id);
     search();
   }
 
@@ -74,7 +73,9 @@ const Vendor: React.FC = () => {
         <IonCol>Name</IonCol>
         <IonCol>Email</IonCol>
         <IonCol>Phone</IonCol>
+        <IonCol>Address</IonCol>
         <IonCol>Web</IonCol>
+        <IonCol>Contact</IonCol>
         <IonCol>Actions</IonCol>
       </IonRow>
 
@@ -84,6 +85,8 @@ const Vendor: React.FC = () => {
             <IonCol>{v.email}</IonCol>
             <IonCol>{v.phone}</IonCol>
             <IonCol>{v.address}</IonCol>
+            <IonCol>{v.web}</IonCol>
+            <IonCol>{v.contact}</IonCol>
             <IonCol>
               <IonButton color="primary" fill='clear'
                 onClick={()=>editVendor(String(v.id))}
