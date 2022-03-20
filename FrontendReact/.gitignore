@@ -8,6 +8,7 @@
 # testing
 /coverage
 
+/android
 # production
 /build
 
